@@ -20,17 +20,8 @@ r = {
     "maxTemperature": 30.0,
     "precision": 1.0,
     "operationModes": [
-        "auto",
-        "heat",
-        "cool",
-        "dry",
-        "swing"
     ],
     "fanModes": [
-        "auto",
-        "low",
-        "mid",
-        "high"
     ],
     "commands": {
         "off": "",
@@ -42,7 +33,7 @@ mode_dict = {
     'heat': 'Heating',
     'cool': 'Cooling',
     'dry': 'Dry',
-    'swing': 'Swing'
+    'fan_only': 'Swing'
 }
 
 fan_dict = {
@@ -51,6 +42,7 @@ fan_dict = {
     'mid': 'Mid wind',
     'high': 'High wind'
 }
+
 
 
 with open('reversed_code.json', 'r', encoding='utf-8') as f:
@@ -79,6 +71,8 @@ def combine_code(mode, fan, temp):
 
 
 def generate_config_file():
+    r['operationModes'] = list(mode_dict.keys())
+    r['fanModes'] = list(fan_dict.keys())
     r['commands']['off'] = src['Turn off Air conditioner2']
 
     cmd = {}
